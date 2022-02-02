@@ -25,11 +25,13 @@
 | Column              | Type        | Options                        |
 | ------------------- | ----------- | ------------------------------ |
 | name                | string      | null: false                    |
-| category            | string      | null: false                    |
+| category_id         | integer     | null: false                    |
 | price               | integer     | null: false                    |
 | content             | text        | null: false                    |
+| charge_id           | string      | null: false                    |
+| date_id             | string      | null: false                    |
 | condition_id        | string      | null: false                    |
-| prefecture_id       | string      |                                |
+| prefecture_id       | string      | null: false                    |
 | user                | references  | null: false, foreign_key: true |
 
 ### Association
@@ -54,12 +56,11 @@
 
 | Column                   | Type        | Options                        |
 | ------------------------ | ----------- | ------------------------------ |
-| post_code                | integer     | null: false                    |
+| post_code                | string      | null: false                    |
 | municipality             | string      | null: false                    |
 | address                  | string      | null: false                    |
 | building_name            | string      |                                |
-| charge_id                | string      | null: false                    |
-| date_id                  | string      | null: false                    |
+| prefecture_id            | string      | null: false                    |
 | phone_number             | string      | null: false                    |
 | purchase                 | references  | null: false, foreign_key: true |
 
