@@ -29,9 +29,9 @@
 | price               | integer     | null: false                    |
 | content             | text        | null: false                    |
 | charge_id           | string      | null: false                    |
-| date_id             | string      | null: false                    |
-| condition_id        | string      | null: false                    |
-| prefecture_id       | string      | null: false                    |
+| date_id             | integer      | null: false                    |
+| condition_id        | integer      | null: false                    |
+| prefecture_id       | integer      | null: false                    |
 | user                | references  | null: false, foreign_key: true |
 
 ### Association
@@ -60,7 +60,7 @@
 | municipality             | string      | null: false                    |
 | address                  | string      | null: false                    |
 | building_name            | string      |                                |
-| prefecture_id            | string      | null: false                    |
+| prefecture_id            | integer     | null: false                    |
 | phone_number             | string      | null: false                    |
 | purchase                 | references  | null: false, foreign_key: true |
 
