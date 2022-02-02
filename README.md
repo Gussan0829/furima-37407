@@ -28,7 +28,7 @@
 | category_id         | integer     | null: false                    |
 | price               | integer     | null: false                    |
 | content             | text        | null: false                    |
-| charge_id           | string      | null: false                    |
+| charge_id           | integer      | null: false                    |
 | date_id             | integer      | null: false                    |
 | condition_id        | integer      | null: false                    |
 | prefecture_id       | integer      | null: false                    |
