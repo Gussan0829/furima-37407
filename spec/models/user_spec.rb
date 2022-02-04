@@ -79,7 +79,7 @@ RSpec.describe User, type: :model do
       it '名字が全角日本語が空のとき' do
         @user.family_name_kan = ''
         @user.valid?
-        expect(@user.errors.full_messages).to include("Family name kan can't be blank", "Family name kan 全角文字を使用してください")
+        expect(@user.errors.full_messages).to include("Family name kan can't be blank")
       end
       it '「名字(カナ)」が全角カタカナではないとき' do
         @user.family_name_kana = 'ai'
@@ -94,7 +94,7 @@ RSpec.describe User, type: :model do
       it '「名字(カナ)」が空のとき' do
         @user.family_name_kana = ''
         @user.valid?
-        expect(@user.errors.full_messages).to include("Family name kan can't be blank") 
+        expect(@user.errors.full_messages).to include("Family name kana can't be blank") 
       end
       it '「名前(カナ)」が空のとき' do
         @user.first_name_kana = ''
