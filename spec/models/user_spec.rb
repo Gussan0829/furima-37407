@@ -30,7 +30,7 @@ RSpec.describe User, type: :model do
       it 'passwordが空では登録できない' do
         @user.password = ""
         @user.valid?
-        expect(@user.errors.full_messages).to include("password can't be blank")
+        expect(@user.errors.full_messages).to include("Password can't be blank", "Password には英字と数字の両方を含めて設定してください", "Password confirmation doesn't match Password")
       end
       it 'passwordとpassword_confirmationが不一致では登録できない' do
         @user.password_confirmation = ''
@@ -83,7 +83,6 @@ RSpec.describe User, type: :model do
         @user.password = '111111111'
         @user.password_confirmation = '111111111'
         @user.valid?
-        binding.pry
         expect(@user.errors.full_messages).to include("Password には英字と数字の両方を含めて設定してください")
       end 
     end
