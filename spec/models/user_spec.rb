@@ -61,27 +61,61 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include("Password is too long (maximum is 128 characters)")
       end
-      it '「名字・名前」が全角日本語ではないとき' do
+      it '名前が全角日本語ではないとき' do
         @user.first_name_kan = 'ai'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("First name kan 全角文字を使用してください")
+      end
+      it '名前が全角日本語が空の時' do
+        @user.first_name_kan = ''
+        @user.valid?
+        expect(@user.errors.full_messages).to include("First name kan can't be blank", "First name kan 全角文字を使用してください")
+      end
+      it '名字が全角日本語ではないとき' do
         @user.family_name_kan = 'ai'
         @user.valid?
-        expect(@user.errors.full_messages).to include("First name kan 全角文字を使用してください", "Family name kan 全角文字を使用してください")
+        expect(@user.errors.full_messages).to include("Family name kan 全角文字を使用してください")
       end
-      it '「名字(カナ)・名前(カナ)」が全角カタカナではないとき' do
-        @user.first_name_kana = 'ai'
+      it '名字が全角日本語が空のとき' do
+        @user.family_name_kan = ''
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Family name kan can't be blank", "Family name kan 全角文字を使用してください")
+      end
+      it '「名字(カナ)」が全角カタカナではないとき' do
         @user.family_name_kana = 'ai'
         @user.valid?
-        expect(@user.errors.full_messages).to include("First name kana 全角文字を使用してください", "Family name kana 全角文字を使用してください") 
+        expect(@user.errors.full_messages).to include("Family name kana 全角文字を使用してください") 
       end
-      it 'passwordが129文字以上では登録できない' do
-        @user.password = Faker::Internet.password(min_length: 129)
-        @user.password_confirmation = @user.password
+      it '「名前(カナ)」が全角カタカナではないとき' do
+        @user.first_name_kana = 'ai'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password is too long (maximum is 128 characters)")
+        expect(@user.errors.full_messages).to include("First name kana 全角文字を使用してください") 
       end
-      it 'パスワード」が英数字混合ではないこと' do
+      it '「名字(カナ)」が空のとき' do
+        @user.family_name_kana = ''
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Family name kana can't be blank", "Family name kana 全角文字を使用してください") 
+      end
+      it '「名前(カナ)」が空のとき' do
+        @user.first_name_kana = ''
+        @user.valid?
+        expect(@user.errors.full_messages).to include("First name kana can't be blank", "First name kana 全角文字を使用してください") 
+      end
+      it 'パスワード」が英字混合ではないこと' do
         @user.password = '111111111'
         @user.password_confirmation = '111111111'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password には英字と数字の両方を含めて設定してください")
+      end 
+      it 'パスワード」が数字混合ではないこと' do
+        @user.password = 'aaaaaaa'
+        @user.password_confirmation = 'aaaaaaa'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password には英字と数字の両方を含めて設定してください")
+      end 
+      it 'パスワード」が全角文字を混合しないこと' do
+        @user.password = 'あああああああああああああああああああああ'
+        @user.password_confirmation = 'あああああああああああああああああああああ'
         @user.valid?
         expect(@user.errors.full_messages).to include("Password には英字と数字の両方を含めて設定してください")
       end 
